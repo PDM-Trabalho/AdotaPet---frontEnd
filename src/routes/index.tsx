@@ -6,7 +6,12 @@ import { View, Text } from "react-native";
 import namePages from "./namePages";
 import { style } from "./style";
 
+import Favorites from "../pages/Favorites";
+import CreatePet from "../pages/CreatePet";
 import Register from "../pages/Register";
+import Account from "../pages/Account";
+import Details from "../pages/Details";
+import Search from "../pages/Search";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 
@@ -59,6 +64,48 @@ export default function StackRoutes() {
         <Screen name={namePages.home} component={Home} />
         <Screen name={namePages.login} component={Login} />
         <Screen name={namePages.register} component={Register} />
+      </Group>
+
+      <Screen
+        name={namePages.search}
+        component={Search}
+        {...optionsIcon("search-outline")}
+      />
+
+      <Group
+        screenOptions={{
+          tabBarItemStyle: { display: "none" },
+        }}
+      >
+        <Screen name={namePages.details} component={Details} />
+      </Group>
+
+      <Group
+        screenOptions={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: 16,
+            fontFamily: theme.font.primary_700,
+            color: theme.color.primary_dark,
+          },
+        }}
+      >
+        <Screen
+          name={namePages.createPet}
+          component={CreatePet}
+          {...optionsIcon("paw-outline")}
+        />
+        <Screen
+          name={namePages.favorites}
+          component={Favorites}
+          {...optionsIcon("heart-outline")}
+        />
+        <Screen
+          name={namePages.account}
+          component={Account}
+          {...optionsIcon("person-outline")}
+        />
       </Group>
     </Navigator>
   );
