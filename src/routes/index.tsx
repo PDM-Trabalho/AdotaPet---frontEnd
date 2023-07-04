@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
 import { View, Text } from "react-native";
 
+import type { RouteProp } from '@react-navigation/native';
+
 import namePages from "./namePages";
 import { style } from "./style";
 
@@ -17,10 +19,19 @@ import Home from "../pages/Home";
 
 const { Navigator, Screen, Group } = createBottomTabNavigator();
 
+interface OptionsIconProps {
+  route: RouteProp<Record<string, object | undefined>, string>;
+}
+
+interface TabBarIconProps {
+  focused: boolean;
+  color: string;
+}
+
 const optionsIcon = (iconName: string) => {
   return {
-    options: ({ route }) => ({
-      tabBarIcon: ({ focused, color }) => (
+    options: ({ route }: OptionsIconProps) => ({
+      tabBarIcon: ({ focused, color }: TabBarIconProps) => (
         <View style={style.viewIconStyle}>
           <Ionicons name={iconName} color={color} size={24} />
           {focused && (
@@ -37,7 +48,7 @@ export default function StackRoutes() {
 
   return (
     <Navigator
-      initialRouteName={namePages.account}
+      initialRouteName={namePages.search}
       screenOptions={{
         tabBarHideOnKeyboard: true,
         headerShown: false,
@@ -47,12 +58,12 @@ export default function StackRoutes() {
         tabBarItemStyle: style.itemStyle,
         tabBarStyle: {
           backgroundColor: theme.color.primary_300,
-          height: 64,
+          height: "7%",
           alignItems: "center",
           flexDirection: "row",
           justifyContent: "space-evenly",
         },
-        tabBarLabel: "",
+        tabBarLabel: () => null,
       }}
     >
       <Group
@@ -107,6 +118,6 @@ export default function StackRoutes() {
           {...optionsIcon("person-outline")}
         />
       </Group>
-    </Navigator>
+    </Navigator>  
   );
 }

@@ -1,4 +1,8 @@
-export default {
+interface Pages {
+    [key: string]: string;
+}
+  
+const pages: Pages = {
     home: "homePage",
     login: "loginPage",
     register: "registerPage",
@@ -7,4 +11,6 @@ export default {
     createPet: "Doar",
     details: "Detalhes",
     account: "Conta",
-}
+};
+  
+export default pages;  

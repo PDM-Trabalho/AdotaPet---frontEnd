@@ -7,7 +7,6 @@ export const style = StyleSheet.create({
         marginLeft: 4,
         borderRadius: 100,
         height: '75%',
-        paddingTop: "2.7%",
         alignItems: 'center',
         textAlignVertical: 'center',
     },
@@ -18,5 +17,10 @@ export const style = StyleSheet.create({
     viewIconStyle: {
         flexDirection: 'row', 
         alignItems: 'center',
-    }
+    },
+    shade: {
+        width: '100%',
+        height: 50,
+        backgroundColor: "#000"
+    },
 })
