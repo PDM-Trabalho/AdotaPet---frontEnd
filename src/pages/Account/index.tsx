@@ -2,6 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FontAwesome5 } from "@expo/vector-icons"
 import * as yup from "yup";
 
 import { 
@@ -19,6 +20,7 @@ import userPerfilNotFound from "../../../assets/user.png";
 import ViewInput from "../../components/ViewInput";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { useTheme } from "styled-components";
 
 const schema = yup
   .object({
@@ -47,15 +49,18 @@ export default function Account() {
         }
 
         main();
-    }, [])
+    }, []);
 
+    const theme = useTheme()
     return (
         <PageStyle>
             <ImageViewStyle>
                 <View>
                     <ImageStyle source={user?.photo || userPerfilNotFound} />
                     <ViewIconStyle>
-                        <ImageSmallIconStyle source={require("../../../assets/pen.svg")} />
+                        <ImageSmallIconStyle>
+                            <FontAwesome5 name="pen" color={theme?.color.white_100} size={12} />
+                        </ImageSmallIconStyle>
                     </ViewIconStyle>
                 </View>
             </ImageViewStyle>
