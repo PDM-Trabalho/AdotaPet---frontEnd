@@ -1,0 +1,31 @@
+{
+    "especies": [
+        {"key": "1", "value": "Cachorro"},
+        {"key": "2", "value": "Gato"},
+        {"key": "3", "value": "Pássaro"},
+        {"key": "4", "value": "Hamster"},
+        {"key": "5", "value": "Peixe"},
+        {"key": "6", "value": "Coelho"},
+        {"key": "7", "value": "Cavalo"}
+    ],
+    "sex": [
+        {"key": "1", "value": "Macho"},
+        {"key": "2", "value": "Femea"}
+    ],
+    "porte": [
+        {"key": "1", "value": "Grande"},
+        {"key": "2", "value": "Medio"},
+        {"key": "2", "value": "Pequeno"}
+    ],
+    "age": [
+        {"key": "1", "value": "1 ano"},
+        {"key": "2", "value": "2 anos"},
+        {"key": "3", "value": "3 anos"},
+        {"key": "4", "value": "4 anos"},
+        {"key": "5", "value": "5 anos"},
+        {"key": "6", "value": "6 anos"},
+        {"key": "7", "value": "7 anos"},
+        {"key": "8", "value": "8 anos"},
+        {"key": "9", "value": "9 anos"},
+    ]
+}
