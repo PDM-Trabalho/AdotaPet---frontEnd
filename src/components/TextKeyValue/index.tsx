@@ -7,7 +7,7 @@ export interface TextProps {
     keyText: string,
     valueText: string,
     fontSize?: number,
-    primary: boolean
+    primary?: boolean
 }
 
 export default function TextKeyValue({ keyText, valueText, primary }: TextProps) {

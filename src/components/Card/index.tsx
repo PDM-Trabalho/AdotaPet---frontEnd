@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
@@ -16,6 +18,7 @@ import TextKeyValue from "../../components/TextKeyValue";
 import namePages from "../../routes/namePages";
 
 export default function Card({ data }: any) {
+    const [ isFavorite, setIsFavorite ] = useState(false);
     const navigation = useNavigation();
     const theme: any = useTheme();
 
@@ -45,6 +48,8 @@ export default function Card({ data }: any) {
         navigation.navigate(namePages.details, { id: dataPet.id })
     }
 
+    const handleFavorite = () => setIsFavorite(!isFavorite);
+
     return (
         <CardStyle>
             <ImageStyle source={require("../../../assets/dog.jpeg")} />
@@ -53,13 +58,13 @@ export default function Card({ data }: any) {
                     <ViewTextStyle>
                         { createElementText(dataPet) }
                     </ViewTextStyle>
-                    <AntDesign name="heart" size={24} color={theme.color.danger} />
+                    <TouchableOpacity activeOpacity={0.3} onPress={handleFavorite}>
+                        <AntDesign name={isFavorite ? "heart" : "hearto"} size={24} color={theme.color.danger} />
+                    </TouchableOpacity>
                 </ViewStyle>
                 <ViewStyle>
                     <ButtonStyle onPress={handlePage}>
-                        <ButtonTextStyle> 
-                            Adotar 
-                        </ButtonTextStyle>
+                        <ButtonTextStyle>Adotar</ButtonTextStyle>
                     </ButtonStyle>
                     <ButtonIconStyle>
                         <AntDesign name="down" size={24} color={theme.color.white_100} />
