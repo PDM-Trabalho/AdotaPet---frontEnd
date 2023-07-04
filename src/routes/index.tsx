@@ -48,7 +48,7 @@ export default function StackRoutes() {
 
   return (
     <Navigator
-      initialRouteName={namePages.search}
+      initialRouteName={namePages.favorite}
       screenOptions={{
         tabBarHideOnKeyboard: true,
         headerShown: false,
