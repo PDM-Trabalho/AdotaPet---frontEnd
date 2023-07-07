@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { Keyboard } from "react-native";
 import * as yup from "yup";
 
 import { PageStyle, FormStyle, ViewLink } from "./style"
@@ -22,17 +24,29 @@ const schema = yup
   })
 
 export default function Login() {
+    const [ linkVisible, setLinkVisible ] = useState(true)
     const navigation = useNavigation();
     const { control, handleSubmit, getValues, setError, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => setLinkVisible(false));
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => setLinkVisible(true));
+    
+        return () => {
+          keyboardDidShowListener.remove();
+          keyboardDidHideListener.remove();
+        };
+      }, []);
 
     async function handleNavigate() {
         try {
             const obj = getValues();
             const { access } = await login(obj);
             navigation.navigate(namePages.search);
-        } catch {
+        } catch(e) {
+            console.log(e)
             const error = { "message": "Email ou senha invalido" };
             setError("password", error);
             setError("email", error);
@@ -62,12 +76,15 @@ export default function Login() {
                         )}
                     />
                 ))}
+                
                 <Link text="Esqueci a senha" page={ namePages.register } />
             </FormStyle>
             <Button text="Entrar" callback={ handleSubmit(handleNavigate) } />
             <ViewLoginButton />
             <ViewLink>
+            { linkVisible ? (
                 <Link text="Você não tem uma conta?" page={ namePages.register } />
+            ) : <></> }
             </ViewLink>
         </PageStyle>
     )

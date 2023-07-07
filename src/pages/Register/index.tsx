@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { Keyboard } from "react-native";
 import * as yup from "yup";
 
 import { PageStyle, FormStyle, ViewLink, ViewControllerStyle } from "./style"
@@ -27,6 +29,7 @@ export default function Register() {
     const { control, handleSubmit, getValues, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
+    const [ linkVisible, setLinkVisible ] = useState(true)
 
     const navigation = useNavigation();
 
@@ -38,6 +41,16 @@ export default function Register() {
             navigation.navigate(namePages.search);
         }
     } 
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => setLinkVisible(false));
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => setLinkVisible(true));
+    
+        return () => {
+          keyboardDidShowListener.remove();
+          keyboardDidHideListener.remove();
+        };
+    }, []);
 
     const listController = [
         {nameId: "name", props: { placeholder: "Nome" } }, 
@@ -68,7 +81,9 @@ export default function Register() {
             <Button text="Cadastrar" callback={ handleSubmit(handleNavigate) } />
             <ViewLoginButton />
             <ViewLink>
-                <Link text="Você tem uma conta?" page={ namePages.login } />
+                { linkVisible ? (
+                    <Link text="Você tem uma conta?" page={ namePages.login } />
+                ) : <></> }
             </ViewLink>
         </PageStyle>
     )
