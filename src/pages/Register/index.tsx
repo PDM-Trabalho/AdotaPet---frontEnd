@@ -8,35 +8,42 @@ import namePages from "../../routes/namePages";
 
 import ViewLoginButton from "../../components/ViewLoginButton"
 import ViewInput from "../../components/ViewInput";
-import TextError from "../../components/TextError";
 import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Input from '../../components/Input';
 import Link from '../../components/Link';
+
+import { postUser, propsUser } from "../../services/crudUser";
 
 const schema = yup
   .object({
     name: yup.string().required("É nescessario enviar o seu nome"),
     email: yup.string().email("Email inválido").required("É nescessario enviar um e-mail"),
     password: yup.string().min(7, "A senha deve conter mais de 7 caracteres").required("É nescessario enviar uma senha forte"),
-    password_confirm: yup.string().oneOf([yup.ref('password'), null], "As senhas devem ser iguais").required("É nescessario confirma a senha")
+    password_confirmation: yup.string().oneOf([yup.ref('password'), null], "As senhas devem ser iguais").required("É nescessario confirma a senha")
   })
 
 export default function Register() {
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, getValues, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
+
     const navigation = useNavigation();
 
-    function handleNavigate() {
-        navigation.navigate(namePages.search);
+    async function handleNavigate() {
+        const obj = getValues();
+        const user = await postUser(obj);
+        // console.log(user)
+        if (user) {
+            navigation.navigate(namePages.search);
+        }
     } 
 
     const listController = [
         {nameId: "name", props: { placeholder: "Nome" } }, 
         {nameId: "email", props: { placeholder: "E-mail" }},
         {nameId: "password", props: { placeholder: "Senha", type: "password" }}, 
-        {nameId: "password_confirm", props: { placeholder: "Confirmar senha", type: "password" }}
+        {nameId: "password_confirmation", props: { placeholder: "Confirmar senha", type: "password" }}
     ];
 
     return (
@@ -46,7 +53,7 @@ export default function Register() {
                 {listController.map(({ nameId, props }, index) => (
                     <Controller 
                         key={ index }
-                        name={ nameId }
+                        name={ nameId } 
                         control={ control }
                         render={({ field: { onChange } }) => (
                             <ViewInput 

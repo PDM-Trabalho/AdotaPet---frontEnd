@@ -13,6 +13,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ViewInput from "../../components/ViewInput";
 
+import { login } from "../../services/login";
+
 const schema = yup
   .object({
     email: yup.string().email("Email inválido").required("É nescessario enviar um e-mail"),
@@ -21,12 +23,20 @@ const schema = yup
 
 export default function Login() {
     const navigation = useNavigation();
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, getValues, setError, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
 
-    function handleNavigate() {
-        navigation.navigate(namePages.search);
+    async function handleNavigate() {
+        try {
+            const obj = getValues();
+            const { access } = await login(obj);
+            navigation.navigate(namePages.search);
+        } catch {
+            const error = { "message": "Email ou senha invalido" };
+            setError("password", error);
+            setError("email", error);
+        }
     } 
 
     const listController = [

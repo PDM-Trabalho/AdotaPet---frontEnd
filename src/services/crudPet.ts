@@ -1,6 +1,6 @@
-// Temporario enquanto não tem um backend
+import { linkApi } from "./config";
 
-export const getPetAndUser = async ( id ) => {
+export const getPetAndUser = async ( id: string ) => {
     return {
         "donor": {
           "name": "João da Silva",
