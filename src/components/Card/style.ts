@@ -14,13 +14,13 @@ export const CardStyle = styled(View)`
         align-items: center;
         
         border-radius: ${RFValue(12)}px;
-        padding: ${RFValue(12)}px;
-        gap: ${RFValue(12)}px;
+        padding: 3%;
+        gap: ${RFValue(8)}px;
     `}
 `;
 
 export const ImageStyle = styled(Image)`
-    width: ${RFValue(128)}px;
+    width: 42%;
     height: 100%;
     border-radius: 8px;
     object-fit: cover;
