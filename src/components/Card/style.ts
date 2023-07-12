@@ -3,7 +3,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 import styled, { css } from "styled-components";
 
-export const CardContentStyle = styled(View)`
+export const CardStyle = styled(View)`
     ${({ theme }) => css`
         background: ${theme.color.white_300};
         width: 100%;
@@ -18,12 +18,6 @@ export const CardContentStyle = styled(View)`
         gap: ${RFValue(12)}px;
     `}
 `;
-
-export const CardExpandStyle = styled(View)`
-    ${({ theme }) => css`
-        
-    `}
-`
 
 export const ImageStyle = styled(Image)`
     width: ${RFValue(128)}px;
@@ -40,7 +34,7 @@ export const ViewContent = styled(View)`
 `;
 
 export const ViewTextStyle = styled(View)`
-    gap: ${RFValue(8)}px;
+    gap: ${RFValue(4)}px;
 `;
 
 export const ViewStyle = styled(View)`
