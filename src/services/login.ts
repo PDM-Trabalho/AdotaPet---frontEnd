@@ -1,4 +1,4 @@
-import { linkApi } from "./config";
+import axios from "./config";
 
 interface loginProps {
     email: string;
@@ -6,11 +6,6 @@ interface loginProps {
 }
 
 export const login = async (objUser: loginProps) => {
-    const config = {
-        method: "POST",
-        body: JSON.stringify(objUser),
-    };
-
-    const tokens = await fetch(`${linkApi}/token`, config);
+    const tokens = await axios.post(`/token`, objUser);
     return { ...tokens };
 };

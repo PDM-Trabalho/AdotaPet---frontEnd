@@ -1,4 +1,4 @@
-import { linkApi } from "./config";
+import axios from "./config";
 
 export const getPetAndUser = async ( id: string ) => {
     return {

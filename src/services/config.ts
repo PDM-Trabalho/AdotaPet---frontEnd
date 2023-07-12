@@ -1,1 +1,10 @@
-export const linkApi: string = "http://127.0.0.1:8000/api"
+import { Platform } from 'react-native';
+import axios from "axios";
+
+const baseUrl = Platform.OS === 'android' ? 'http://10.0.0.2' : 'http://localhost';
+
+const instance = axios.create({ 
+    baseURL: `${baseUrl}:8000/api`
+});
+
+export default instance;
