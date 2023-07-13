@@ -1,4 +1,4 @@
-import axios from "./config";
+import { axiosPublic as axios } from "./config";
 
 interface loginProps {
     username: string;

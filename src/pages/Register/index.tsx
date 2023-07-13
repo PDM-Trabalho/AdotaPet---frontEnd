@@ -44,8 +44,7 @@ export default function Register() {
         } catch(err) {
             const errors = err.response.data
             for (const field in errors) {
-                // setError(field, getPortuguese(errors[field]))
-                setError(field, "getPortuguese(errors[field])")
+                setError(field, getPortuguese(errors[field]))
             }
         }
     } 
