@@ -9,7 +9,7 @@ export interface propsUser {
 
 export const postUser = async (objUser: propsUser) => {
     const user = await axios.post("/users/", objUser)
-    return { user };
+    return { ...user.data };
 };
 
 // export const updateUser = async({ nome, email })

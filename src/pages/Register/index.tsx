@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,7 +39,8 @@ export default function Register() {
         try {
             const obj = getValues();
             const user = await postUser(obj);
-            navigation.navigate(namePages.search, { userId: user.id });
+            AsyncStorage.setItem("userId", user.id)
+            navigation.navigate(namePages.search);
         } catch(err) {
             const errors = err.response.data
             for (const field in errors) {

@@ -6,6 +6,6 @@ interface loginProps {
 }
 
 export const login = async (objUser: loginProps) => {
-    const response = await axios.post(`/token`, objUser)
+    const response = await axios.post(`/token/`, objUser)
     return { ...response.data }
 };
