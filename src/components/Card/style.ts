@@ -14,13 +14,13 @@ export const CardStyle = styled(View)`
         align-items: center;
         
         border-radius: ${RFValue(12)}px;
-        padding: 3%;
+        padding: 2%;
         gap: ${RFValue(8)}px;
     `}
 `;
 
 export const ImageStyle = styled(Image)`
-    width: 42%;
+    width: 43%;
     height: 100%;
     border-radius: 8px;
     object-fit: cover;
@@ -30,26 +30,24 @@ export const ViewContent = styled(View)`
     justify-content: space-between;
     gap: ${RFValue(4)}px; 
     height: 100%;
-    flex: 1;
+    flex-grow: 1;
 `;
 
 export const ViewTextStyle = styled(View)`
-    gap: ${RFValue(4)}px;
+    gap: ${RFValue(8)}px;
+    flex-grow: 1;
 `;
 
 export const ViewStyle = styled(View)`
-    justify-content: space-between;
-    width: ${RFValue(155)}px;
+    width: 100%;
     flex-direction: row;
     gap: ${RFValue(8)}px;
 `;
 
-export const ViewButtonStyle = styled(ViewStyle)``;
-
 export const ButtonStyle = styled(TouchableOpacity)`
     ${({ theme }) => css`
         background: ${theme.color.primary_200};
-        width: ${RFValue(110)}px;
+        flex-grow: 1;
         height: ${RFValue(40)}px;
         border-radius: ${RFValue(8)}px;
         align-items: center;
