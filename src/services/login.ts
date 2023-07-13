@@ -1,11 +1,11 @@
 import axios from "./config";
 
 interface loginProps {
-    email: string;
+    username: string;
     password: string;
 }
 
 export const login = async (objUser: loginProps) => {
-    const tokens = await axios.post(`/token`, objUser);
-    return { ...tokens };
+    const response = await axios.post(`/token`, objUser)
+    return { ...response.data }
 };

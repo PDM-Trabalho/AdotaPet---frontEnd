@@ -19,7 +19,7 @@ import { login } from "../../services/login";
 
 const schema = yup
   .object({
-    email: yup.string().email("Email inválido").required("É nescessario enviar um e-mail"),
+    username: yup.string().required("É nescessario enviar um username"),
     password: yup.string().min(7, "A senha deve conter mais de 7 caracteres").required("É nescessario enviar uma senha forte"),
   })
 
@@ -43,18 +43,18 @@ export default function Login() {
     async function handleNavigate() {
         try {
             const obj = getValues();
-            const { access } = await login(obj);
-            navigation.navigate(namePages.search);
-        } catch(e) {
-            console.log(e)
+            const { access, refresh } = await login(obj);
+            // navigation.navigate(namePages.search);
+        } catch(err) {
+            console.error(err.response.status)
             const error = { "message": "Email ou senha invalido" };
             setError("password", error);
-            setError("email", error);
+            setError("username", error);
         }
     } 
 
     const listController = [
-        {nameId: "email", props: { placeholder: "E-mail" }},
+        {nameId: "username", props: { placeholder: "E-mail" }},
         {nameId: "password", props: { placeholder: "Senha", type: "password" }}, 
     ];
 
