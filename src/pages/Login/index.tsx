@@ -1,11 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { Keyboard } from "react-native";
 import * as yup from "yup";
-
 
 import { PageStyle, FormStyle, ViewLink } from "./style"
 import namePages from "../../routes/namePages";
@@ -46,10 +44,9 @@ export default function Login() {
         try {
             const obj = getValues();
             const { access, refresh } = await login(obj);
-            AsyncStorage.setItem("access_token", access)
-            AsyncStorage.setItem("refresh_token", refresh)
-            navigation.navigate(namePages.search);
+            // navigation.navigate(namePages.search);
         } catch(err) {
+            console.error(err.response.status)
             const error = { "message": "Email ou senha invalido" };
             setError("password", error);
             setError("username", error);

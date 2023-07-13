@@ -1,4 +1,4 @@
-export const getPortuguese = (phrase: string) => {
+export const getPortuguese = (phrase) => {
     const tradutor = {
         "A user with that username already exists.": "Um usuário com esse username já existe"
     };

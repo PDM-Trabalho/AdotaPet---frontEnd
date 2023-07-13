@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from "react";
 
+=======
+import { useState } from "react";
+>>>>>>> parent of 3fd8363... Register e Login finalizado
 import { PageStyle } from "../style";
 import { getPets } from "../../services/crudPet";
 
