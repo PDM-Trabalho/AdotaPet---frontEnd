@@ -1,16 +1,16 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 
+import { getUserIdStorage } from "../../services/storage";
 import { getPetsFavorite } from "../../services/crudPet";
 import { PageStyle } from "../style";
 
 import Title from "../../components/Title";
 import Card from "../../components/Card";
 
-const userId = AsyncStorage.getItem("userId");
+const userId = getUserIdStorage();
 
 export default function Favorites() {
-    const [listPets, setListPets] = useState([])
+    const [listPets, setListPets] = useState([]);
 
     useEffect(() => {
         const main = async () => {
@@ -20,15 +20,17 @@ export default function Favorites() {
             } catch (err) {
                 console.error(err.response.status);
             }
-        }
-    
-        main()
-    }, [])
+        };
+
+        main();
+    }, []);
 
     return (
         <PageStyle>
             <Title text="Pagina em Construção" />
-            <Card data={pet} />
+            {listPets.map((pet) => (
+                <Card data={pet} />
+            ))}
         </PageStyle>
-    )
+    );
 }

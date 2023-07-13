@@ -43,9 +43,27 @@ interface TabBarIconProps {
 
 export default function PrivateRoutes() {
     const theme: any = useTheme();
-    
+
     return (
-        <>
+        <Navigator
+            initialRouteName={namePages.search}
+            screenOptions={{
+                tabBarHideOnKeyboard: true,
+                headerShown: false,
+                tabBarActiveTintColor: theme.color.primary_300,
+                tabBarInactiveTintColor: theme.color.white_300,
+                tabBarActiveBackgroundColor: theme.color.secondary,
+                tabBarItemStyle: style.itemStyle,
+                tabBarStyle: {
+                    backgroundColor: theme.color.primary_300,
+                    height: "7%",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
+                },
+                tabBarLabel: () => null,
+            }}
+        >
             <Screen
                 name={namePages.search}
                 component={Search}
@@ -87,6 +105,6 @@ export default function PrivateRoutes() {
                     {...optionsIcon("person-outline")}
                 />
             </Group>
-        </>
+        </Navigator>
     );
 }
