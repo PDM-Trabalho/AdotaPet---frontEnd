@@ -16,17 +16,18 @@ import Input from '../../components/Input';
 import Link from '../../components/Link';
 
 import { postUser, propsUser } from "../../services/crudUser";
+import { getPortuguese } from "../../services/tradutor";
 
 const schema = yup
   .object({
-    name: yup.string().required("É nescessario enviar o seu nome"),
+    username: yup.string().required("É nescessario enviar o seu nome"),
     email: yup.string().email("Email inválido").required("É nescessario enviar um e-mail"),
     password: yup.string().min(7, "A senha deve conter mais de 7 caracteres").required("É nescessario enviar uma senha forte"),
     password_confirmation: yup.string().oneOf([yup.ref('password'), null], "As senhas devem ser iguais").required("É nescessario confirma a senha")
   })
 
 export default function Register() {
-    const { control, handleSubmit, getValues, formState: { errors } } = useForm({
+    const { control, handleSubmit, getValues, setError, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
     const [ linkVisible, setLinkVisible ] = useState(true)
@@ -34,11 +35,15 @@ export default function Register() {
     const navigation = useNavigation();
 
     async function handleNavigate() {
-        const obj = getValues();
-        const user = await postUser(obj);
-        // console.log(user)
-        if (user) {
-            navigation.navigate(namePages.search);
+        try {
+            const obj = getValues();
+            const user = await postUser(obj);
+            navigation.navigate(namePages.search, { userId: user.id });
+        } catch(err) {
+            const errors = err.response.data
+            for (const field in errors) {
+                setError(field, getPortuguese(errors[field]))
+            }
         }
     } 
 
@@ -53,8 +58,8 @@ export default function Register() {
     }, []);
 
     const listController = [
-        {nameId: "name", props: { placeholder: "Nome" } }, 
         {nameId: "email", props: { placeholder: "E-mail" }},
+        {nameId: "username", props: { placeholder: "Nome" }}, 
         {nameId: "password", props: { placeholder: "Senha", type: "password" }}, 
         {nameId: "password_confirmation", props: { placeholder: "Confirmar senha", type: "password" }}
     ];

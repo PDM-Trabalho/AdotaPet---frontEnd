@@ -1,5 +1,15 @@
 import axios from "./config";
 
+export const getPets = async (userId: number, text: string) => {
+  const pets = await axios.get(`/user/${userId}/pets/`);
+  return pets.data;
+}
+
+export const getPetsFavorite = async (userId: string) => {
+  const pets = await axios.get(`/user/${userId}/pets/favorites/`);
+  return pets.data;
+}
+
 export const getPetAndUser = async ( id: string ) => {
     return {
         "donor": {
