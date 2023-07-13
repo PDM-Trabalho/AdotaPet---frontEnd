@@ -10,4 +10,5 @@ export default function Title({ type = "text", ...props }) {
         inputProps.inputMode = "numeric"
 
     return <InputStyle { ...inputProps } />
+
 }
