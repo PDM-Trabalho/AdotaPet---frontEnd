@@ -1,8 +1,10 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 
 import { PageStyle, ViewButton, ViewInputStyle } from "./style";
+import namePages from "../../routes/namePages"
 
 import {
     objEspecie,
@@ -31,7 +33,10 @@ const schema = yup.object({
 })
 
 export default function CreatePet() {
+    // const navigation = useNavigation()
+    
     const handlePhoto = () => console.log("Em construção");
+
     const {
         control,
         handleSubmit,
@@ -47,6 +52,10 @@ export default function CreatePet() {
         { title: "Comprimento", nameId: "length" },
         { title: "Comprimento", nameId: "age" },
     ];
+
+    // const handleButton = () => {
+    //     navigation.navigate(namePages.details, {  })
+    // }
 
     const propsViewInput = [
         ...listObjSelect.map((obj) => ({

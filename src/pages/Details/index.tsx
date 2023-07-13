@@ -22,9 +22,9 @@ import TextKeyValue from "../../components/TextKeyValue";
 
 export default function Details() {
     const route = useRoute();
-    const { id } = route.params || 1; // Lembrar de retirar esse 1 depois
+    const { userId } = route.params || 1; // Lembrar de retirar esse 1 depois
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState<any>({});
 
     useEffect(() => {
         const main = async () => {
