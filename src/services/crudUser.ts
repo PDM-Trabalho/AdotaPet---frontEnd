@@ -25,6 +25,5 @@ export const updateUser = async (id: string, objUser: propsUser) => {
 }
 
 export const deleteUser = async (id: string) => {
-    const user = await axios.delete(`/users/${id}`)
-    return { ...user.data };
+    await axios.delete(`/users/${id}`)
 }
