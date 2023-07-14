@@ -1,7 +1,7 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true
-  },
-  "include": ["./*", "src/config.ts"]
+    "extends": "expo/tsconfig.base",
+    "compilerOptions": {
+        "strict": true
+    },
+    "include": ["./*", "src/config.ts", "src/contexts/AuthContext.tsx"]
 }

@@ -1,14 +1,12 @@
-import { useTheme } from "styled-components";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import namePages from "./namePages";
-import { style } from "./style";
 
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 
-const { Navigator, Screen, Group } = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function PublicRoutes() {
     return (
@@ -16,7 +14,8 @@ export default function PublicRoutes() {
             initialRouteName={namePages.home}
             screenOptions={{
                 tabBarItemStyle: { display: "none" },
-                tabBarStyle: { display: "none" }
+                tabBarStyle: { display: "none" },
+                headerShown: false
             }}
         >
             <Screen name={namePages.home} component={Home} />
